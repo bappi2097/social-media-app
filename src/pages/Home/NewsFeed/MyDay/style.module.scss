@@ -1,0 +1,62 @@
+.myday_div {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+    display: flex;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        width: 2px;
+        height: 2px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #fafafa;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #fafafa;
+    }
+    & {
+        scrollbar-face-color: #fafafa;
+        scrollbar-track-color: #fafafa;
+    }
+    .items {
+        display: flex;
+        flex-flow: nowrap;
+        .item {
+            list-style: none;
+            height: 100px;
+            width: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .image_div {
+                padding: 0;
+                margin: 0;
+                border-radius: 50%;
+                height: 52px;
+                width: 52px;
+                img {
+                    margin: 1px;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                }
+            }
+            .name {
+                width: 100px;
+                color: #b3b3b3;
+                text-align: center;
+                span {
+                    font-size: 14px;
+                    font-weight: 300;
+                }
+            }
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}

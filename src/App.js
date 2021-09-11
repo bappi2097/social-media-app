@@ -1,25 +1,28 @@
-import logo from "./logo.svg";
+import React from "react";
+import { Redirect, Route, Switch } from "react-router";
+import Login from "./pages/Auth/Login";
 import "./App.css";
+import SignUp from "./pages/Auth/SignUp";
+import Newsfeed from "./pages/Home/NewsFeed";
 
 function App() {
-    console.log(process.env.REACT_APP_FIREBASE_DATABASE_URL);
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <React.Fragment>
+            <Switch>
+                <Route path="/" exact>
+                    <Redirect to="/newsfeed"></Redirect>
+                </Route>
+                <Route path="/signup" exact>
+                    <SignUp />
+                </Route>
+                <Route path="/login">
+                    <Login />
+                </Route>
+                <Route path="/newsfeed">
+                    <Newsfeed />
+                </Route>
+            </Switch>
+        </React.Fragment>
     );
 }
 

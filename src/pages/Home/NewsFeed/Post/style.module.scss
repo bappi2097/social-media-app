@@ -1,0 +1,123 @@
+@import "/src/assets/scss/variable";
+
+.post {
+    padding: 10px 0;
+    margin: {
+        top: 1rem;
+        bottom: 1rem;
+    }
+    width: 100%;
+    .post_nav {
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .user {
+            width: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            img {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+            }
+            span {
+                margin-left: 10px;
+                font-size: 13px;
+                font-weight: 600;
+            }
+        }
+    }
+    .social_iteraction {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        font-size: 24px;
+        div {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100px;
+        }
+    }
+    .liked_by {
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        img {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+        }
+        span {
+            margin-left: 10px;
+            font-size: 14px;
+            a {
+                color: black;
+                font-weight: bold;
+                text-decoration: none;
+            }
+        }
+    }
+    .public_comment {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+        .comment {
+            font-size: 13px;
+            display: block;
+            a {
+                color: black;
+                font-weight: 700;
+                margin-right: 7px;
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        }
+        .comment_heart {
+            width: 20px;
+            margin-left: 10px;
+        }
+    }
+    .post_date {
+        padding: 10px;
+        font-weight: 400;
+        color: gray;
+        text-transform: uppercase;
+        font-size: 11px;
+    }
+    .content {
+        margin-top: 10px;
+        p {
+            padding: 10px;
+        }
+        img {
+            width: 100%;
+        }
+    }
+    .post_comment {
+        border-top: 1px solid $card-border;
+        form {
+            display: flex;
+            input {
+                height: 45px;
+                border: none;
+                outline: none;
+                width: calc(100% - 70px);
+                padding-left: 10px;
+            }
+            button {
+                color: $primary;
+                width: 60px;
+                border: none;
+                outline: none;
+                background-color: transparent;
+                cursor: pointer;
+            }
+        }
+    }
+}

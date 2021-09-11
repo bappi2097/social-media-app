@@ -1,0 +1,6 @@
+@import "/src/assets/scss/variable";
+.card{
+    background-color: $card-background;
+    border: 1px solid $card-border;
+    padding: 1rem;
+}

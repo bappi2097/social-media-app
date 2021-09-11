@@ -1,0 +1,25 @@
+@import "/src/assets/scss/variable";
+
+.container {
+    margin: {
+        top: 1.5rem;
+        bottom: 1.5rem;
+    }
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    .left_div {
+        width: 65%;
+    }
+}
+
+@media all and (min-width: 320px) {
+}
+@media all and (min-width: 768px) {
+}
+
+@media all and (min-width: 1024px) {
+}
+
+@media all and (min-width: 1440px) {
+}
