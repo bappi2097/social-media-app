@@ -58,7 +58,6 @@ export async function getAllUsers() {
 export async function getAllPosts() {
     const response = await fetch(`${FIREBASE_DOMAIN}/users.json`);
     const data = await response.json();
-    // console.log(data);
 
     if (!response.ok) {
         throw new Error(data.message || "Could not fetch Posts.");
@@ -77,7 +76,6 @@ export async function getAllPosts() {
             transformedPosts.push(postObj);
         }
     }
-    console.log(transformedPosts);
 
     return transformedPosts;
 }
@@ -125,7 +123,6 @@ export async function getSinglepost(userId, postId) {
 }
 
 export async function addPost(userId, postData) {
-    console.log(postData);
     const response = await fetch(
         `${FIREBASE_DOMAIN}/users/${userId}/posts.json`,
         {
@@ -141,7 +138,7 @@ export async function addPost(userId, postData) {
         throw new Error(data.message || "Could not create post.");
     }
 
-    return null;
+    return data;
 }
 
 export async function addComment(userId, postId, commentData) {
@@ -165,6 +162,31 @@ export async function addComment(userId, postId, commentData) {
 }
 
 export async function getAllComments(userId, postId) {
+    const response = await fetch(
+        `${FIREBASE_DOMAIN}/users/${userId}/posts/${postId}/comments.json`
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Could not get comments.");
+    }
+
+    const transformedComments = [];
+
+    for (const key in data) {
+        const commentObj = {
+            id: key,
+            ...data[key],
+        };
+
+        transformedComments.push(commentObj);
+    }
+
+    return transformedComments;
+}
+
+export async function getPostComments(userId, postId) {
     const response = await fetch(
         `${FIREBASE_DOMAIN}/users/${userId}/posts/${postId}/comments.json`
     );

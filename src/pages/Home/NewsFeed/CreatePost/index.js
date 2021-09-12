@@ -1,9 +1,9 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import placeholder from "../../../../assets/images/placeholder.svg";
 import Card from "../../../../components/UI/Card";
 import classes from "./style.module.scss";
 import { addPost } from "../../../../services/api";
-const MakePost = () => {
+const CreatePost = (props) => {
     const [content, setContent] = useState("");
     const [imageState, setImageState] = useState("");
     const image = useRef();
@@ -25,8 +25,17 @@ const MakePost = () => {
             content: content,
             image: imageState,
         })
-            .then((response) => console.log(response))
-            .catch((error) => console.log(error));
+            .then((response) => {
+                props.onCreate({
+                    id: response.name,
+                    content: content,
+                    image: imageState,
+                    userName: localStorage.getItem("fullname"),
+                });
+                setContent("");
+                image.current.src = placeholder;
+            })
+            .catch((error) => console.error(error));
     };
     return (
         <Card className={classes.make_post}>
@@ -57,4 +66,4 @@ const MakePost = () => {
     );
 };
 
-export default MakePost;
+export default CreatePost;

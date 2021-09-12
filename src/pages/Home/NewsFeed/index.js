@@ -4,7 +4,7 @@ import Container from "../../../components/UI/Container";
 import classes from "./style.module.scss";
 import MyDay from "./MyDay";
 import Post from "./Post";
-import MakePost from "./MakePost";
+import CreatePost from "./CreatePost";
 import { getAllPosts } from "../../../services/api";
 const Newsfeed = () => {
     const [posts, setPosts] = useState([]);
@@ -16,12 +16,15 @@ const Newsfeed = () => {
         };
         fetchPosts();
     }, []);
+    const newPostCreate = (post) => {
+        setPosts([...posts, post]);
+    };
     return (
         <Fragment>
             <NavBar />
             <Container className={classes.container}>
                 <div className={classes.left_div}>
-                    <MakePost />
+                    <CreatePost onCreate={newPostCreate} />
                     <MyDay />
                     {posts.length > 0 &&
                         posts.map((post) => <Post key={post.id} data={post} />)}

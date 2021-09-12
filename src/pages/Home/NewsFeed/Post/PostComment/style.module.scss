@@ -1,0 +1,22 @@
+@import "/src/assets/scss/variable";
+.post_comment {
+    border-top: 1px solid $card-border;
+    form {
+        display: flex;
+        input {
+            height: 45px;
+            border: none;
+            outline: none;
+            width: calc(100% - 70px);
+            padding-left: 10px;
+        }
+        button {
+            color: $primary;
+            width: 60px;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    }
+}

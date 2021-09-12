@@ -9,6 +9,7 @@ import { BsChat } from "react-icons/bs";
 import Card from "../../../../components/UI/Card";
 import classes from "./style.module.scss";
 import userImg from "../../../../assets/images/user/user-1.jpg";
+import PostComment from "./PostComment";
 const Post = (props) => {
     return (
         <Card className={classes.post}>
@@ -40,24 +41,7 @@ const Post = (props) => {
                     <a href="/">18 others</a>
                 </span>
             </div>
-            <div className={classes.public_comment}>
-                <div className={classes.comment}>
-                    <a href="/">john.doe</a>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Quis magnam, dignissimos cupiditate alias doloremque
-                    deserunt praesentium incidunt rerum illum quod?
-                </div>
-                <span className={classes.comment_heart}>
-                    <AiOutlineHeart />
-                </span>
-            </div>
-            <p className={classes.post_date}>Auguest 9</p>
-            <div className={classes.post_comment}>
-                <form>
-                    <input type="text" placeholder="Add a comment..." />
-                    <button type="button">Post</button>
-                </form>
-            </div>
+            <PostComment postId={props.data.id} />
         </Card>
     );
 };

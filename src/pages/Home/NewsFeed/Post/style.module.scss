@@ -60,29 +60,7 @@
             }
         }
     }
-    .public_comment {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 10px;
-        .comment {
-            font-size: 13px;
-            display: block;
-            a {
-                color: black;
-                font-weight: 700;
-                margin-right: 7px;
-                text-decoration: none;
-            }
-            a:hover {
-                text-decoration: underline;
-            }
-        }
-        .comment_heart {
-            width: 20px;
-            margin-left: 10px;
-        }
-    }
+
     .post_date {
         padding: 10px;
         font-weight: 400;
@@ -97,27 +75,6 @@
         }
         img {
             width: 100%;
-        }
-    }
-    .post_comment {
-        border-top: 1px solid $card-border;
-        form {
-            display: flex;
-            input {
-                height: 45px;
-                border: none;
-                outline: none;
-                width: calc(100% - 70px);
-                padding-left: 10px;
-            }
-            button {
-                color: $primary;
-                width: 60px;
-                border: none;
-                outline: none;
-                background-color: transparent;
-                cursor: pointer;
-            }
         }
     }
 }
