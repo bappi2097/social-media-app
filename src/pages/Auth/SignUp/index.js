@@ -1,42 +1,125 @@
-import Card from "../../../components/UI/Card";
+import { Fragment, useReducer } from "react";
+import { Link, useHistory } from "react-router-dom";
 import classes from "./style.module.scss";
-import { Fragment } from "react";
+import Card from "../../../components/UI/Card";
+import Input from "../../../components/Form/Input";
+import { signUp } from "../../../services/api";
+import useHttp from "../../../hooks/use-http";
+
+const formReducer = (state, action) => {
+    switch (action.type) {
+        case "EMAIL_INPUT":
+            return {
+                ...state,
+                email: action.value,
+                emailIsValid: action.isValid,
+                formIsValid:
+                    action.isValid &&
+                    state.passwordIsValid &&
+                    state.fullNameIsValid,
+            };
+        case "FULLNAME_INPUT":
+            return {
+                ...state,
+                fullName: action.value,
+                fullNameIsValid: action.isValid,
+                formIsValid:
+                    state.emailIsValid &&
+                    state.passwordIsValid &&
+                    action.isValid,
+            };
+        case "PASSWORD_INPUT":
+            return {
+                ...state,
+                password: action.value,
+                passwordIsValid: action.isValid,
+                formIsValid:
+                    state.emailIsValid &&
+                    action.isValid &&
+                    state.fullNameIsValid,
+            };
+        default:
+            return { ...state };
+    }
+};
+
+const initialFormData = {
+    email: "",
+    fullName: "",
+    password: "",
+    emailIsValid: false,
+    fullNameIsValid: false,
+    passwordIsValid: false,
+    formIsValid: false,
+};
+
 const SignUp = () => {
+    const [formState, dispatchState] = useReducer(formReducer, initialFormData);
+    const { sendRequest, status } = useHttp(signUp);
+    const history = useHistory();
+    const signupSubmitHandler = (event) => {
+        event.preventDefault();
+        sendRequest({
+            email: formState.email,
+            fullName: formState.fullName,
+            password: formState.password,
+        });
+        console.log(status);
+        if (status === "completed") {
+            history.push({
+                pathname: "/",
+            });
+        }
+    };
+
+    const emailValues = (value, isValid = false) => {
+        dispatchState({ type: "EMAIL_INPUT", value, isValid });
+    };
+
+    const fullNameValues = (value, isValid = false) => {
+        dispatchState({ type: "FULLNAME_INPUT", value, isValid });
+    };
+
+    const passwordValues = (value, isValid = false) => {
+        dispatchState({ type: "PASSWORD_INPUT", value, isValid });
+    };
     return (
         <Fragment>
             <div className={classes.signup__div}>
                 <div className={classes.right__div}>
                     <Card className={classes.signup_form}>
-                        <form>
+                        <form onSubmit={signupSubmitHandler}>
                             <div>
                                 <h1>Instagram</h1>
                             </div>
-                            <div className={classes.form__control}>
-                                <label htmlFor="email">Email</label>
-                                <input type="email" className={classes.email} />
-                            </div>
-                            <div className={classes.form__control}>
-                                <label htmlFor="full_name">Full Name</label>
-                                <input type="text" className={classes.email} />
-                            </div>
+                            <Input
+                                type="email"
+                                id="email"
+                                label="Email"
+                                inputValues={emailValues}
+                                validation={(value) => value.includes("@")}
+                            />
+                            <Input
+                                type="text"
+                                id="fullname"
+                                label="Full Name"
+                                inputValues={fullNameValues}
+                                validation={(value) => value.length > 2}
+                            />
 
-                            <div className={classes.form__control}>
-                                <label htmlFor="user_name">Username</label>
-                                <input type="text" className={classes.email} />
-                            </div>
-                            <div
-                                className={`${classes.form__control} ${classes.group}`}
+                            <Input
+                                type="password"
+                                id="password"
+                                label="Password"
+                                inputValues={passwordValues}
+                                validation={(value) => value.length > 7}
+                            />
+                            <button
+                                disabled={!formState.formIsValid}
+                                className={classes.signup}
                             >
-                                <label htmlFor="password">Password</label>
-                                <input
-                                    type="password"
-                                    className={classes.password}
-                                />
-                                <button type="button" className={classes.btn}>
-                                    Show
-                                </button>
-                            </div>
-                            <button className={classes.signup}>Sign up </button>
+                                Sign up{" "}
+                            </button>
                             <p className={classes.no}>
                                 Lorem ipsum dolor sit amet conse noen
                             </p>
@@ -44,7 +127,8 @@ const SignUp = () => {
                     </Card>
                     <Card className={classes.login__div}>
                         <p>
-                            Already have an account? <a href="/login">Log In</a>
+                            Already have an account?
+                            <Link to="/login">Log In</Link>
                         </p>
                     </Card>
                     <div className={classes.get__app}>
@@ -58,16 +142,6 @@ const SignUp = () => {
             </div>
             <div className={classes.footer}>
                 <div className={classes.links}>
-                    <a href="/">About</a>
-                    <a href="/">About</a>
-                    <a href="/">About</a>
-                    <a href="/">About</a>
-                    <a href="/">About</a>
-                    <a href="/">About</a>
-                    <a href="/">About</a>
-                    <a href="/">About</a>
-                    <a href="/">About</a>
-                    <a href="/">About</a>
                     <a href="/">About</a>
                     <a href="/">About</a>
                     <a href="/">About</a>

@@ -1,14 +1,20 @@
+import React, { useContext } from "react";
+import AuthContext from "../../store/auth-context";
 import classes from "./style.module.scss";
 import {
     AiOutlineCompass,
-    AiOutlineHome,
+    // AiOutlineHome,
     AiOutlineHeart,
     AiOutlineSend,
     AiOutlineSearch,
+    AiOutlineLogout,
+    AiFillHome,
 } from "react-icons/ai";
 import Container from "../UI/Container";
+import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
+    const authContext = useContext(AuthContext);
     return (
         <nav className={classes.navbar}>
             <Container>
@@ -36,12 +42,13 @@ const NavBar = () => {
                     <div className={classes.nav__links}>
                         <ul className={classes.nav__items}>
                             <li className={classes.nav__item}>
-                                <a
+                                <NavLink
                                     className={`${classes.nav__link} ${classes.nav__link}`}
-                                    href="/"
+                                    to="/newsfeed"
                                 >
-                                    <AiOutlineHome />
-                                </a>
+                                    {/* <AiOutlineHome /> */}
+                                    <AiFillHome />
+                                </NavLink>
                             </li>
                             <li className={classes.nav__item}>
                                 <a className={classes.nav__link} href="/">
@@ -60,7 +67,10 @@ const NavBar = () => {
                             </li>
                             <li className={classes.nav__item}>
                                 <a className={classes.nav__link} href="/">
-                                    <div></div>
+                                    <AiOutlineLogout
+                                        onClick={authContext.onLogout}
+                                        title="Logout"
+                                    />
                                 </a>
                             </li>
                         </ul>

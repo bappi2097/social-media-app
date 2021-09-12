@@ -1,35 +1,105 @@
 import Card from "../../../components/UI/Card";
 import classes from "./style.module.scss";
 import { FaFacebookSquare } from "react-icons/fa";
-import { Fragment } from "react";
+import { Fragment, useEffect, useReducer, useContext } from "react";
+import Input from "../../../components/Form/Input";
+import { Link, useHistory } from "react-router-dom";
+import { getAllUsers } from "../../../services/api";
+import useHttp from "../../../hooks/use-http";
+import AuthContext from "../../../store/auth-context";
+
+const formReducer = (state, action) => {
+    switch (action.type) {
+        case "EMAIL_INPUT":
+            return {
+                ...state,
+                email: action.value,
+                emailIsValid: action.isValid,
+                formIsValid: action.isValid && state.passwordIsValid,
+            };
+        case "PASSWORD_INPUT":
+            return {
+                ...state,
+                password: action.value,
+                passwordIsValid: action.isValid,
+                formIsValid: state.emailIsValid && action.isValid,
+            };
+        default:
+            return { ...state };
+    }
+};
+const initialFormData = {
+    email: "",
+    password: "",
+    emailIsValid: false,
+    passwordIsValid: false,
+    formIsValid: false,
+};
+
 const Login = () => {
+    const authContext = useContext(AuthContext);
+    const [formState, dispatchState] = useReducer(formReducer, initialFormData);
+    const { sendRequest, data: userData } = useHttp(getAllUsers, true);
+    const history = useHistory();
+
+    useEffect(() => {
+        sendRequest();
+    }, []);
+
+    const loginSubmitHandler = async (event) => {
+        event.preventDefault();
+
+        userData.forEach((item) => {
+            if (
+                item.email === formState.email &&
+                item.password === formState.password
+            ) {
+                authContext.onLogin(item.id, item.email, item.fullName);
+                history.push({
+                    pathname: "/newsfeed",
+                });
+            }
+        });
+    };
+
+    const emailValues = (value, isValid = false) => {
+        dispatchState({ type: "EMAIL_INPUT", value, isValid });
+    };
+
+    const passwordValues = (value, isValid = false) => {
+        dispatchState({ type: "PASSWORD_INPUT", value, isValid });
+    };
     return (
         <Fragment>
             <div className={classes.login__div}>
                 <div className={classes.left__div}></div>
                 <div className={classes.right__div}>
                     <Card className={classes.login_form}>
-                        <form>
+                        <form onSubmit={loginSubmitHandler}>
                             <div>
                                 <h1>Instagram</h1>
                             </div>
-                            <div className={classes.form__control}>
-                                <label htmlFor="email">Email</label>
-                                <input type="email" className={classes.email} />
-                            </div>
-                            <div
-                                className={`${classes.form__control} ${classes.group}`}
+                            <Input
+                                type="email"
+                                id="email"
+                                label="Email"
+                                inputValues={emailValues}
+                                validation={(value) => value.includes("@")}
+                            />
+
+                            <Input
+                                type="password"
+                                id="password"
+                                label="Password"
+                                inputValues={passwordValues}
+                                validation={(value) => value.length > 7}
+                            />
+                            <button
+                                disabled={!formState.formIsValid}
+                                className={classes.login_btn}
                             >
-                                <label htmlFor="password">Password</label>
-                                <input
-                                    type="password"
-                                    className={classes.password}
-                                />
-                                <button type="button" className={classes.btn}>
-                                    Show
-                                </button>
-                            </div>
-                            <button className={classes.login}>Log In </button>
+                                Log In
+                            </button>
                             <p className={classes.or}>OR</p>
                             <a href="/" className={classes.facebook__login}>
                                 <FaFacebookSquare /> &nbsp;
@@ -42,7 +112,8 @@ const Login = () => {
                     </Card>
                     <Card className={classes.signup__div}>
                         <p>
-                            Don't have an account? <a href="/signup">Sign Up</a>
+                            Don't have an account?
+                            <Link to="/signup">Sign Up</Link>
                         </p>
                     </Card>
                     <div className={classes.get__app}>

@@ -9,27 +9,21 @@ import { BsChat } from "react-icons/bs";
 import Card from "../../../../components/UI/Card";
 import classes from "./style.module.scss";
 import userImg from "../../../../assets/images/user/user-1.jpg";
-const Post = () => {
+const Post = (props) => {
     return (
         <Card className={classes.post}>
             <div className={classes.post_nav}>
                 <div className={classes.user}>
                     <img src={userImg} alt="john doe" />
-                    <span>john_doe</span>
+                    <span>{props.data.userName}</span>
                 </div>
                 <span className={classes.dots}>
                     <AiOutlineEllipsis />
                 </span>
             </div>
             <div className={classes.content}>
-                <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Doloremque necessitatibus labore mollitia ratione, magnam
-                    dolorum! Accusantium asperiores soluta quos itaque a quasi,
-                    perferendis perspiciatis alias temporibus inventore dolorum
-                    suscipit mollitia?
-                </p>
-                <img src={userImg} alt="John Doe" />
+                <p>{props.data.content}</p>
+                <img src={props.data.image} alt="John Doe" />
             </div>
             <div className={classes.social_iteraction}>
                 <div>

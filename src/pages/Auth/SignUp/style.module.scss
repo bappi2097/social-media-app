@@ -1,34 +1,34 @@
 @import "/src/assets/scss/variable";
-.signup__div{
+.signup__div {
     width: calc(100% - 20px);
     padding: 10px;
     display: block;
     justify-content: space-between;
-    .right__div{
+    .right__div {
         width: 40%;
         padding: 10px;
         margin: auto;
-        .signup_form{
-            background-color: #FFF;
-            div{
-                h1{
+        .signup_form {
+            background-color: #fff;
+            div {
+                h1 {
                     background: {
-                        image: url('../../../assets/images/background.png');
+                        image: url("../../../assets/images/background.png");
                         position: 0 -130px;
-                    };
+                    }
                     color: transparent;
                     width: 176px;
                     height: 53px;
                     margin: auto;
                 }
             }
-            .form__control{
-                label{
+            .form__control {
+                label {
                     display: block;
                     margin: {
                         left: 10px;
                         top: 12px;
-                    };
+                    }
                     position: absolute;
                     color: #7d97d3;
                     font: {
@@ -36,36 +36,38 @@
                         size: 14px;
                     }
                 }
-                input{
+                input {
                     height: 36px;
                     width: 100%;
                     margin: {
                         top: 10px;
                         bottom: 10px;
-                    };
-                    
+                    }
+
                     background: {
-                        color: #E8F0FE;
-                    };
+                        color: #e8f0fe;
+                    }
                     font: {
-                        size: 18px;;
-                    };
-                    border: 1px solid #DBDBDB;
+                        size: 18px;
+                    }
+                    border: 1px solid #dbdbdb;
                     border-radius: 4px;
-                    &:focus-visible, &:focus, &:active{
+                    &:focus-visible,
+                    &:focus,
+                    &:active {
                         border: 1px solid #b1b1b1;
                         background: {
                             color: #edf2fc;
-                        };
+                        }
                     }
                 }
             }
-            .group{
+            .group {
                 position: relative;
-                input{
+                input {
                     width: 100%;
                 }
-                .btn{
+                .btn {
                     position: absolute;
                     right: 0;
                     top: 1px;
@@ -73,13 +75,13 @@
                     padding: {
                         top: 9px;
                         bottom: 10px;
-                    };
+                    }
                     width: 80px;
                     border: none;
-                    background-color: #FAFAFA;
+                    background-color: #fafafa;
                 }
             }
-            .signup{
+            .signup {
                 display: block;
                 width: 100%;
                 padding: 10px 0;
@@ -88,27 +90,31 @@
                 color: white;
                 font-size: 16px;
                 margin: 10px 0;
+                &:disabled {
+                    background-color: #dbdbdb;
+                    color: black;
+                    cursor: not-allowed;
+                }
             }
         }
-        
     }
-    .login__div{
+    .login__div {
         color: rgb(54, 54, 54);
         text-align: center;
         margin: 10px 0;
-        a{
+        a {
             color: $primary;
             text-decoration: none;
         }
     }
-    .get__app{
+    .get__app {
         text-align: center;
         margin-top: 10px;
-        div{
+        div {
             display: flex;
             align-items: center;
             justify-content: space-around;
-            a{
+            a {
                 color: $primary;
                 text-decoration: none;
             }
@@ -116,38 +122,38 @@
     }
 }
 
-.footer{
+.footer {
     width: 50%;
     margin: auto;
     color: lightgray;
     font-weight: 200;
     font-size: 13px;
-    .links{
+    .links {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
         margin: 20px 0;
-        a{
+        a {
             margin: auto 10px;
             text-decoration: none;
             color: lightgray;
         }
     }
-    .copyright{
+    .copyright {
         text-align: center;
     }
 }
 @media all and (min-width: 320px) {
-    .signup__div{
+    .signup__div {
         display: block;
         width: 100%;
         padding: 0;
         margin: 0;
-        .left__div{
+        .left__div {
             display: none;
         }
-        .right__div{
+        .right__div {
             margin: auto 0;
             width: calc(100% - 10px);
             padding: {
@@ -155,20 +161,20 @@
                 right: 5px;
                 bottom: 0;
                 left: 5px;
-            };
+            }
             height: fit-content;
         }
     }
-    .footer{
+    .footer {
         width: 100%;
     }
 }
 @media all and (min-width: 768px) {
-    .signup__div{
+    .signup__div {
         display: block;
         width: 50%;
         margin: 0 auto;
-        .right__div{
+        .right__div {
             margin: auto 0;
             width: calc(100% - 10px);
             padding: {
@@ -176,32 +182,32 @@
                 right: 10px;
                 bottom: 0;
                 left: 10px;
-            };
+            }
         }
     }
 }
 
 @media all and (min-width: 1024px) {
-    .signup__div{
+    .signup__div {
         display: block;
         width: 80%;
         padding: 0;
         margin: 5% auto;
         height: (100% - 5%);
-        .right__div{
+        .right__div {
             margin: auto;
             width: 48%;
             padding: 10px;
             height: fit-content;
         }
     }
-    .footer{
+    .footer {
         width: 60%;
     }
 }
 
 @media all and (min-width: 1440px) {
-    .signup__div{
+    .signup__div {
         width: 50%;
     }
 }
