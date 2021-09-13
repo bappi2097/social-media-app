@@ -1,7 +1,7 @@
 import Card from "../../../components/UI/Card";
 import classes from "./style.module.scss";
 import { FaFacebookSquare } from "react-icons/fa";
-import { Fragment, useEffect, useReducer, useContext } from "react";
+import { Fragment, useReducer, useContext } from "react";
 import Input from "../../../components/Form/Input";
 import { Link, useHistory } from "react-router-dom";
 import { getAllUsers } from "../../../services/api";
@@ -37,29 +37,31 @@ const initialFormData = {
 };
 
 const Login = () => {
+    const { sendRequest, data: userData } = useHttp(getAllUsers, true);
+
     const authContext = useContext(AuthContext);
     const [formState, dispatchState] = useReducer(formReducer, initialFormData);
-    const { sendRequest, data: userData } = useHttp(getAllUsers, true);
     const history = useHistory();
-
-    useEffect(() => {
-        sendRequest();
-    }, []);
 
     const loginSubmitHandler = async (event) => {
         event.preventDefault();
-
-        userData.forEach((item) => {
-            if (
-                item.email === formState.email &&
-                item.password === formState.password
-            ) {
-                authContext.onLogin(item.id, item.email, item.fullName);
-                history.push({
-                    pathname: "/newsfeed",
+        const getRequest = () => {
+            sendRequest().then((response) => {
+                console.log(response);
+                userData.forEach((item) => {
+                    if (
+                        item.email === formState.email &&
+                        item.password === formState.password
+                    ) {
+                        authContext.onLogin(item.id, item.email, item.fullName);
+                        history.push({
+                            pathname: "/home",
+                        });
+                    }
                 });
-            }
-        });
+            });
+        };
+        getRequest();
     };
 
     const emailValues = (value, isValid = false) => {

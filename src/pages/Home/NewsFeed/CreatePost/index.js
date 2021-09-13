@@ -1,21 +1,12 @@
-import React, { useRef, useState } from "react";
-import placeholder from "../../../../assets/images/placeholder.svg";
+import React, { useState } from "react";
 import Card from "../../../../components/UI/Card";
 import classes from "./style.module.scss";
 import { addPost } from "../../../../services/api";
+import ImageInput from "../../../../components/Form/ImageInput";
 const CreatePost = (props) => {
     const [content, setContent] = useState("");
     const [imageState, setImageState] = useState("");
-    const image = useRef();
-    const input_img = useRef();
-    const imageInputHandler = (e) => {
-        let reader = new FileReader();
-        reader.onload = (e) => {
-            image.current.src = e.target.result;
-            setImageState(e.target.result);
-        };
-        reader.readAsDataURL(e.target.files[0]);
-    };
+
     const contentChangeHandler = (event) => {
         setContent(event.target.value);
     };
@@ -33,32 +24,23 @@ const CreatePost = (props) => {
                     userName: localStorage.getItem("fullname"),
                 });
                 setContent("");
-                image.current.src = placeholder;
             })
             .catch((error) => console.error(error));
     };
+
+    const imageChangeHandler = (value) => {
+        setImageState(value);
+    };
+
     return (
         <Card className={classes.make_post}>
             <form onSubmit={formSubmitHandler}>
-                <textarea onChange={contentChangeHandler}></textarea>
+                <textarea
+                    value={content}
+                    onChange={contentChangeHandler}
+                ></textarea>
                 <div className={classes.footer}>
-                    <div className={classes.img_div}>
-                        <button type="button" className={classes.img_btn}>
-                            <img
-                                ref={image}
-                                className={classes.show_img}
-                                src={placeholder}
-                                alt="Dummy"
-                            />
-                        </button>
-                        <input
-                            onInput={imageInputHandler}
-                            ref={input_img}
-                            className={classes.img_input}
-                            type="file"
-                            accept="image/*"
-                        />
-                    </div>
+                    <ImageInput onImageChange={imageChangeHandler} />
                     <button className={classes.post_btn}>Post</button>
                 </div>
             </form>

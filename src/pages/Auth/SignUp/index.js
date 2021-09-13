@@ -55,7 +55,7 @@ const initialFormData = {
 
 const SignUp = () => {
     const [formState, dispatchState] = useReducer(formReducer, initialFormData);
-    const { sendRequest, status } = useHttp(signUp);
+    const { sendRequest } = useHttp(signUp);
     const history = useHistory();
     const signupSubmitHandler = (event) => {
         event.preventDefault();
@@ -64,12 +64,9 @@ const SignUp = () => {
             fullName: formState.fullName,
             password: formState.password,
         });
-        console.log(status);
-        if (status === "completed") {
-            history.push({
-                pathname: "/",
-            });
-        }
+        history.push({
+            pathname: "/login",
+        });
     };
 
     const emailValues = (value, isValid = false) => {

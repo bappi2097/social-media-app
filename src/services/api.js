@@ -121,6 +121,21 @@ export async function getSinglepost(userId, postId) {
 
     return loadedpost;
 }
+export const addImage = async (image) => {
+    const response = await fetch(`${FIREBASE_DOMAIN}/images.json`, {
+        method: "POST",
+        body: JSON.stringify({ data: image }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || "Could not create image.");
+    }
+
+    return data;
+};
 
 export async function addPost(userId, postData) {
     const response = await fetch(
@@ -189,6 +204,51 @@ export async function getAllComments(userId, postId) {
 export async function getPostComments(userId, postId) {
     const response = await fetch(
         `${FIREBASE_DOMAIN}/users/${userId}/posts/${postId}/comments.json`
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Could not get comments.");
+    }
+
+    const transformedComments = [];
+
+    for (const key in data) {
+        const commentObj = {
+            id: key,
+            ...data[key],
+        };
+
+        transformedComments.push(commentObj);
+    }
+
+    return transformedComments;
+}
+
+export async function likePost(userId, postId, likeData) {
+    const response = await fetch(
+        `${FIREBASE_DOMAIN}/users/${userId}/posts/${postId}/likes.json`,
+        {
+            method: "POST",
+            body: JSON.stringify(likeData),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Could not add comment.");
+    }
+
+    return { data };
+}
+
+export async function getPostLikes(userId, postId) {
+    const response = await fetch(
+        `${FIREBASE_DOMAIN}/users/${userId}/posts/${postId}/likes.json`
     );
 
     const data = await response.json();

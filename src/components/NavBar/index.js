@@ -3,13 +3,12 @@ import AuthContext from "../../store/auth-context";
 import classes from "./style.module.scss";
 import {
     AiOutlineCompass,
-    // AiOutlineHome,
-    AiOutlineHeart,
+    AiOutlineHome,
     AiOutlineSend,
     AiOutlineSearch,
     AiOutlineLogout,
-    AiFillHome,
 } from "react-icons/ai";
+import { FaRegUserCircle } from "react-icons/fa";
 import Container from "../UI/Container";
 import { NavLink } from "react-router-dom";
 
@@ -43,11 +42,11 @@ const NavBar = () => {
                         <ul className={classes.nav__items}>
                             <li className={classes.nav__item}>
                                 <NavLink
-                                    className={`${classes.nav__link} ${classes.nav__link}`}
-                                    to="/newsfeed"
+                                    activeClassName={classes.active}
+                                    to="/"
+                                    exact
                                 >
-                                    {/* <AiOutlineHome /> */}
-                                    <AiFillHome />
+                                    <AiOutlineHome />
                                 </NavLink>
                             </li>
                             <li className={classes.nav__item}>
@@ -61,9 +60,12 @@ const NavBar = () => {
                                 </a>
                             </li>
                             <li className={classes.nav__item}>
-                                <a className={classes.nav__link} href="/">
-                                    <AiOutlineHeart />
-                                </a>
+                                <NavLink
+                                    activeClassName={classes.active}
+                                    to="/timeline"
+                                >
+                                    <FaRegUserCircle />
+                                </NavLink>
                             </li>
                             <li className={classes.nav__item}>
                                 <a className={classes.nav__link} href="/">
