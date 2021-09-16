@@ -226,9 +226,14 @@ export async function getPostComments(userId, postId) {
     return transformedComments;
 }
 
-export async function likePost(userId, postId, likeData) {
+export async function likePost(userId, postId, likeData, likeId = null) {
+    if (likeId) {
+        likeId = "/" + likeId;
+    } else {
+        likeId = "";
+    }
     const response = await fetch(
-        `${FIREBASE_DOMAIN}/users/${userId}/posts/${postId}/likes.json`,
+        `${FIREBASE_DOMAIN}/users/${userId}/posts/${postId}/likes${likeId}.json`,
         {
             method: "POST",
             body: JSON.stringify(likeData),

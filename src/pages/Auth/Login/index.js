@@ -2,9 +2,9 @@ import Card from "../../../components/UI/Card";
 import classes from "./style.module.scss";
 import { FaFacebookSquare } from "react-icons/fa";
 import { Fragment, useReducer, useContext } from "react";
-import Input from "../../../components/Form/Input";
 import { Link, useHistory } from "react-router-dom";
 import { getAllUsers } from "../../../services/api";
+import Input from "../../../components/Form/Input";
 import useHttp from "../../../hooks/use-http";
 import AuthContext from "../../../store/auth-context";
 
@@ -47,18 +47,22 @@ const Login = () => {
         event.preventDefault();
         const getRequest = () => {
             sendRequest().then((response) => {
-                console.log(response);
-                userData.forEach((item) => {
-                    if (
-                        item.email === formState.email &&
-                        item.password === formState.password
-                    ) {
-                        authContext.onLogin(item.id, item.email, item.fullName);
-                        history.push({
-                            pathname: "/home",
-                        });
-                    }
-                });
+                userData &&
+                    userData.forEach((item) => {
+                        if (
+                            item.email === formState.email &&
+                            item.password === formState.password
+                        ) {
+                            authContext.onLogin(
+                                item.id,
+                                item.email,
+                                item.fullName
+                            );
+                            history.push({
+                                pathname: "/",
+                            });
+                        }
+                    });
             });
         };
         getRequest();

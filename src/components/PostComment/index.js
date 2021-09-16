@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import classes from "./style.module.scss";
 import Comment from "../Comment";
-import { addComment, getPostComments } from "../../../../../services/api";
+import { addComment, getPostComments } from "../../services/api";
 const PostComment = (props) => {
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]);

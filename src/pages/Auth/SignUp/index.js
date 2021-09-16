@@ -5,6 +5,7 @@ import Card from "../../../components/UI/Card";
 import Input from "../../../components/Form/Input";
 import { signUp } from "../../../services/api";
 import useHttp from "../../../hooks/use-http";
+import { addUser } from "../../../services/api-v2";
 
 const formReducer = (state, action) => {
     switch (action.type) {
@@ -59,11 +60,16 @@ const SignUp = () => {
     const history = useHistory();
     const signupSubmitHandler = (event) => {
         event.preventDefault();
-        sendRequest({
+        addUser({
             email: formState.email,
             fullName: formState.fullName,
             password: formState.password,
         });
+        // sendRequest({
+        //     email: formState.email,
+        //     fullName: formState.fullName,
+        //     password: formState.password,
+        // });
         history.push({
             pathname: "/login",
         });

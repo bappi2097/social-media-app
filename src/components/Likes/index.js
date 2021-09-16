@@ -1,6 +1,6 @@
 import classes from "./style.module.scss";
 
-import userImg from "../../../../../assets/images/user/user-1.jpg";
+import userImg from "../../assets/images/user/user-1.jpg";
 const Likes = (props) => {
     return (
         <div className={classes.liked_by}>

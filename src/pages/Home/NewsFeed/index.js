@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Container from "../../../components/UI/Container";
 import classes from "./style.module.scss";
-import MyDay from "../NewsFeed/MyDay";
-import Post from "../NewsFeed/Post";
-import CreatePost from "../NewsFeed/CreatePost";
+import MyDay from "../../../components/MyDay";
+import Post from "../../../components/Post";
+import CreatePost from "../../../components/CreatePost";
 import { getAllPosts } from "../../../services/api";
 const Home = () => {
     const [posts, setPosts] = useState([]);
@@ -34,7 +34,9 @@ const Home = () => {
                     onScroll={scrollHandler}
                 />
                 {posts.length > 0 &&
-                    posts.map((post) => <Post key={post.id} data={post} />)}
+                    posts.map((post) => (
+                        <Post key={post.id} isLiked={true} data={post} />
+                    ))}
             </div>
             <div className={classes.right_div}></div>
         </Container>

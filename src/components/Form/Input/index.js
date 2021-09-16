@@ -12,7 +12,7 @@ const Input = (props) => {
 
     useEffect(() => {
         props.inputValues(enteredInput, isValid);
-    }, [enteredInput]);
+    }, [enteredInput, isValid]);
 
     const emailInputClasses = !inputHasError
         ? `${classes.form__control}`

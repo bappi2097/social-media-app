@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Card from "../../../../components/UI/Card";
+import Card from "../UI/Card";
 import classes from "./style.module.scss";
-import { addPost } from "../../../../services/api";
-import ImageInput from "../../../../components/Form/ImageInput";
+import { addPost } from "../../services/api";
+import ImageInput from "../Form/ImageInput";
 const CreatePost = (props) => {
     const [content, setContent] = useState("");
     const [imageState, setImageState] = useState("");

@@ -39,6 +39,12 @@
             align-items: center;
             justify-content: space-between;
             width: 100px;
+            .heart {
+                color: rgb(219, 49, 19);
+            }
+            svg {
+                cursor: pointer;
+            }
         }
     }
 
