@@ -35,7 +35,7 @@ const Home = () => {
                 />
                 {posts.length > 0 &&
                     posts.map((post) => (
-                        <Post key={post.id} isLiked={true} data={post} />
+                        <Post key={post.id} isLiked={false} data={post} />
                     ))}
             </div>
             <div className={classes.right_div}></div>

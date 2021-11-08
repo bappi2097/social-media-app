@@ -47,6 +47,7 @@ const Login = () => {
         event.preventDefault();
         const getRequest = () => {
             sendRequest().then((response) => {
+                console.log(userData);
                 userData &&
                     userData.forEach((item) => {
                         if (

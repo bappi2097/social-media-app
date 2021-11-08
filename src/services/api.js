@@ -1,5 +1,5 @@
 const FIREBASE_DOMAIN =
-    "https://social-media-f8e9f-default-rtdb.asia-southeast1.firebasedatabase.app";
+    "https://social-media-2-10a98-default-rtdb.asia-southeast1.firebasedatabase.app";
 
 export async function signUp(userData) {
     const response = await fetch(`${FIREBASE_DOMAIN}/users.json`, {
